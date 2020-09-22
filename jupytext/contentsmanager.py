@@ -431,6 +431,9 @@ def build_jupytext_contents_manager_class(base_contents_manager_class):
             """The parent directory"""
             if "/" in path:
                 return path.rsplit("/", 1)[0]
+            # jupyter-fs
+            if ":" in path and hasattr(self, "_managers"):
+                return path.rsplit(":", 1)[0] + ":"
             return ""
 
         def get_config_file(self, directory):
